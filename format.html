@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deja Brew</title>
+
+    <link rel="icon" href="coffee_logo.png" type="image/png">
+    <!-- Font Awesome CDN Link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'main-color': '#443',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    }
+                },
+            },
+            variants: {
+                extend: {
+                    opacity: ['group-hover'],
+                    transform: ['group-hover'],
+                    scale: ['group-hover'],
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #443;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-link {
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            background-color: #f3f4f6;
+            padding-left: 1.5rem;
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .fade-animation {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .fade-in:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 991px) {
+            html {
+                font-size: 55%;
+            }
+
+            .header {
+                padding: 3rem;
+            }
+
+            section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .heading {
+                font-size: 6rem;
+            }
+
+            .heading span {
+                font-size: 2.3rem;
+            }
+
+            #menu-btn {
+                display: initial;
+            }
+
+            #menu-btn.fa-times {
+                transform: rotate(180deg);
+            }
+
+            .header .navbar {
+                position: absolute;
+                top: 99%;
+                left: 0;
+                right: 0;
+                background: #fff;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            }
+
+            .header .navbar.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .header .navbar a {
+                display: block;
+                font-size: 2.2rem;
+                margin: 0;
+                padding: 1.5rem 2rem;
+            }
+
+            .home {
+                text-align: center;
+            }
+
+            .home .row .content h3 {
+                font-size: 4rem;
+            }
+
+            .menu .box-container .box {
+                margin-left: 0;
+                margin-top: 6rem;
+                flex-flow: column;
+                text-align: center;
+            }
+
+            .menu .box-container .box img {
+                margin-left: 0;
+                margin-top: -6rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            html {
+                font-size: 50%;
+            }
+
+            .home .row .image img {
+                height: auto;
+                width: 100%;
+            }
+
+            .footer .grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, auto);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-poppins text-main-color">
+    <!-- HEADER -->
+    <header
+        class="fixed top-0 left-0 right-0 flex items-center justify-between z-50 bg-white shadow-md px-6 py-4 transition-all duration-300 fade-animation">
+        <!-- Menu Button -->
+        <div id="menu-btn" class="text-3xl cursor-pointer lg:hidden hover:text-main-color/70 transition-colors"
+            onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <a href="#" class="text-3xl font-bold hover:text-main-color/70 transition-colors flex items-center fade-in">
+            DejaBrew <i class="fas fa-mug-hot ml-2 hover:text-main-color/70 transition-colors"></i>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-6">
+            <a href="#home" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Home</a>
+            <a href="#about" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">About</a>
+            <a href="#menu" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Menu</a>
+            <a href="#review" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Review</a>
+            <a href="#order"
+                class="border-main-color rounded-full hover:bg-main-color hover:text-white transition-all duration-300 px-6 py-2">Order</a>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Sidebar -->
+    <div id="mobile-menu"
+        class="fixed top-0 left-[-100%] h-full w-[70%] bg-white shadow-lg z-[1000] transition-transform duration-300 ease-in-out transform mobile-menu-animation">
+        <div class="p-6 flex flex-col space-y-4">
+            <br> <br>
+            <a href="#home"
+                class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Home</a>
+            <a href="#about"
+                class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">About</a>
+            <a href="#menu"
+                class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Menu</a>
+            <a href="#review"
+                class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Review</a>
+
+            <a href="#order"
+                class="mt-10 text-center border-2 border-main-color rounded-full hover:bg-main-color hover:text-white transition-all duration-300 px-10 py-3">Order
+                Now</a>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay"
+        class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 z-[999] overlay-animation">
+    </div>
+
+
+    <!-- HOME -->
+    <section class="home min-h-screen pt-48 bg-cover bg-center h-screen" id="home"
+        style="background-image: url('image/menu-bg.jpg');">
+        <div class="container mx-auto p-4 max-w-screen-sm w-full">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Text Section -->
+                <div class="w-full md:w-1/2 text-left space-y-4">
+                    <h1 class="fade-in text-5xl font-bold text-gray-800 mt-2">Welcome to Deja Brew</h1>
+                    <p class="fade-in text-lg text-gray-600">
+                        Enjoy the finest brews and a cozy atmosphere. Discover our rich flavors, crafted with love.
+                    </p>
+                    <br>
+                    <a href="#order"
+                        class="fade-in mt-10 text-center px-10 py-3 border-2 border-main-color rounded-full hover:bg-main-color hover:text-white transition-all duration-300">Order
+                        Now</a>
+                </div>
+
+                <!-- Main Image Section -->
+                <div class="w-full md:w-1/2 flex flex-col items-center md:items-start mt-6 md:mt-0">
+                    <div class="fade-in mb-4">
+                        <img id="mainImage" src="image/home-img-3.png" alt="Deja Brew Main"
+                            class="w-full h-auto max-w-xs rounded-lg transform transition-transform duration-500 hover:scale-105 animate-float" />
+                    </div>
+
+                    <!-- Thumbnail Images -->
+                    <div class="flex space-x-4 fade-in">
+                        <img src="image/home-img-2.png" onclick="changeMainImage(this)"
+                            class="thumbnail w-auto h-20 rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-110" />
+                        <img src="image/home-img-1.png" onclick="changeMainImage(this)"
+                            class="thumbnail w-auto h-20 rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-110" />
+                        <img src="image/home-img-3.png" onclick="changeMainImage(this)"
+                            class="thumbnail w-auto h-20 rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-110" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about py-16" id="about">
+        <h1
+            class="fade-in text-5xl md:text-8xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-main-color to-transparent text-center relative mb-12">
+            About Us
+            <span
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl md:text-3xl text-main-color w-full">what
+                makes us special</span>
+        </h1>
+
+        <div class="flex flex-col lg:flex-row items-center gap-6 max-w-screen-lg mx-auto">
+            <div class="fade-in flex-1 relative overflow-hidden rounded-lg shadow-lg">
+                <img src="image/about-img.jpg"
+                    class="w-full animate-pulse transition-transform transform hover:scale-105" alt="About Us Image">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-30 rounded-lg"></div>
+            </div>
+            <div class="flex-1 text-center lg:text-left mt-8 lg:mt-0">
+                <div class="flex flex-wrap justify-center lg:justify-start gap-6">
+                    <div
+                        class="p-6 text-center border-2 border-main-color rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                        <div class="fade-in p-4 bg-main-color rounded-full">
+                            <img src="image/about-icon-1.png" class="h-20 mx-auto mb-2" alt="">
+                        </div>
+                        <h3 class="fade-in text-xl font-semibold mt-2">Quality Coffee</h3>
+                    </div>
+                    <div
+                        class="p-6 text-center border-2 border-main-color rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                        <div class="fade-in p-4 bg-main-color rounded-full">
+                            <img src="image/about-icon-2.png" class="h-20 mx-auto mb-2" alt="">
+                        </div>
+                        <h3 class="fade-in text-xl font-semibold mt-2">Cozy Environment</h3>
+                    </div>
+                    <div
+                        class="p-6 text-center border-2 border-main-color rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                        <div class="fade-in p-4 bg-main-color rounded-full">
+                            <img src="image/about-icon-3.png" class="h-20 mx-auto mb-2" alt="">
+                        </div>
+                        <h3 class="fade-in text-xl font-semibold mt-2">Low-Cost Delivery</h3>
+                    </div>
+                    <div
+                        class="p-6 text-center border-2 border-main-color rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                        <div class="text-brown fade-in p-4 bg-main-color rounded-full">
+                            <img src="image/wifi.png" class="h-20 mx-auto mb-2" alt="">
+                        </div>
+                        <h3 class="fade-in text-xl font-semibold mt-2">Free Internet</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu py-16 bg-cover bg-center" id="menu" style="background-image: url('image/menu-bg.jpg');">
+        <h1
+            class="fade-in text-8xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-main-color to-transparent text-center relative mb-12">
+            Our Coffee
+        </h1>
+
+        <div class="flex flex-wrap justify-center gap-8 max-w-screen-lg mx-auto">
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-1.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 1</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="fade-in text-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-2.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 2</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="fade-in text-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-3.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 3</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="fade-in text-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-4.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 4</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="fade-in text-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-5.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 5</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="tfade-in ext-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+            <a href="#"
+                class="fade-in flex items-center gap-6 p-8 border-2 border-main-color rounded-lg hover:border-dashed w-full max-w-md relative group">
+                <img src="image/menu-6.png"
+                    class="h-32 absolute -left-14 top-1/2 transform -translate-y-1/2 group-hover:scale-105 transition-transform"
+                    alt="">
+                <div class="ml-24">
+                    <h3 class="fade-in text-2xl mb-2">Our Special Coffee 6</h3>
+                    <p class="fade-in text-sm mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
+                        sed.</p>
+                    <span class="fade-in text-2xl font-semibold">Php 50.00</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- REVIEW -->
+    <section class="review py-16" id="review">
+        <h1
+            class="fade-in text-5xl md:text-9xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-main-color to-transparent text-center relative mb-12">
+            Reviews
+            <span
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl md:text-3xl text-main-color w-full">what
+                people say</span>
+        </h1>
+
+        <div class="swiper review-slider py-8">
+            <div class="swiper-wrapper">
+                <div
+                    class="swiper-slide p-4 md:p-6 border-2 border-main-color rounded-3xl relative text-center shadow-lg transition-transform transform hover:scale-105">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-gray-300"></i>
+                    <i class="fas fa-quote-right absolute bottom-6 right-6 text-4xl text-gray-300"></i>
+                    <img src="image/pic-1.png" class="fade-in h-20 w-20 rounded-full mx-auto mb-4" alt="">
+                    <div class="fade-in stars mb-4">
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                    </div>
+                    <p class="fade-in text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, earum
+                        quis
+                        dolorem quaerat tenetur illum.</p>
+                    <h3 class="fade-in text-lg md:text-xl font-semibold mb-2">Johny Doe</h3>
+                    <span class="fade-in text-sm text-gray-600">Satisfied Client</span>
+                </div>
+                <div
+                    class="swiper-slide p-4 md:p-6 border-2 border-main-color rounded-3xl relative text-center shadow-lg transition-transform transform hover:scale-105">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-gray-300"></i>
+                    <i class="fas fa-quote-right absolute bottom-6 right-6 text-4xl text-gray-300"></i>
+                    <img src="image/pic-1.png" class="fade-in h-20 w-20 rounded-full mx-auto mb-4" alt="">
+                    <div class="fade-in stars mb-4">
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                    </div>
+                    <p class="fade-in text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, earum
+                        quis
+                        dolorem quaerat tenetur illum.</p>
+                    <h3 class="fade-in text-lg md:text-xl font-semibold mb-2">Alex John</h3>
+                    <span class="fade-in text-sm text-gray-600">Satisfied Customer</span>
+                </div>
+                <div
+                    class="swiper-slide p-4 md:p-6 border-2 border-main-color rounded-3xl relative text-center shadow-lg transition-transform transform hover:scale-105">
+                    <i class="fas fa-quote-left absolute top-6 left-6 text-4xl text-gray-300"></i>
+                    <i class="fas fa-quote-right absolute bottom-6 right-6 text-4xl text-gray-300"></i>
+                    <img src="image/pic-1.png" class="fade-in h-20 w-20 rounded-full mx-auto mb-4" alt="">
+                    <div class="fade-in stars mb-4">
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                        <i class="fas fa-star text-main-color text-xl"></i>
+                    </div>
+                    <p class="fade-in text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, earum
+                        quis
+                        dolorem quaerat tenetur illum.</p>
+                    <h3 class="fade-in text-lg md:text-xl font-semibold mb-2">John Deo</h3>
+                    <span class="fade-in text-sm text-gray-600">Satisfied Customer</span>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+
+    <!-- ORDER -->
+    <section class="fade-in py-16 bg-cover bg-center" id="order" style="background-image: url('image/book-bg.jpg');">
+        <h1
+            class="fade-in text-8xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-main-color to-transparent text-center relative mb-12">
+            Order
+        </h1>
+
+        <form class="max-w-2xl mx-auto p-12 border-2 border-main-color rounded-3xl">
+            <!-- Item Selection -->
+            <div class="mb-4">
+                <label for="items" class="fade-in block mb-2 text-lg font-semibold">Select Items</label>
+                <select id="items"
+                    class="fade-in w-full p-4 border-2 border-main-color rounded-lg bg-transparent focus:border-dashed">
+                    <option value="" disabled selected>Select an item</option>
+                    <option value="coffee">[BESTSELLER] Coffee 1</option>
+                    <option value="coffee">Coffee 2</option>
+                    <option value="coffee">Coffee 3</option>
+                    <option value="coffee">Coffee 4</option>
+                    <option value="coffee">Coffee 5</option>
+                    <option value="coffee">Coffee 6</option>
+                </select>
+            </div>
+
+            <!-- Delivery Mode Selection -->
+            <div class="mb-4">
+                <label for="deliveryMode" class="fade-in block mb-2 text-lg font-semibold">Mode of Delivery</label>
+                <select id="deliveryMode"
+                    class="fade-in w-full p-4 border-2 border-main-color rounded-lg bg-transparent focus:border-dashed">
+                    <option value="" disabled selected>Select delivery mode</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="onsite">Onsite</option>
+                </select>
+            </div>
+
+            <!-- Address Input -->
+            <div class="mb-4" id="addressField" style="display: none;">
+                <label for="address" class="fade-in block mb-2 text-lg font-semibold">Delivery Address</label>
+                <input type="text" id="address" placeholder="Enter your address"
+                    class="w-full p-4 border-2 border-main-color rounded-lg bg-transparent focus:border-dashed">
+            </div>
+
+            <!-- Note Input -->
+            <div class="mb-4">
+                <label for="note" class="fade-in block mb-2 text-lg font-semibold">Notes</label>
+                <textarea id="note" placeholder="Add any special requests or notes"
+                    class="w-full p-4 h-40 resize-none border-2 border-main-color rounded-lg bg-transparent focus:border-dashed"></textarea>
+            </div>
+
+            <!-- Proceed Button -->
+            <button type="submit"
+                class="fade-in px-6 py-2 border-2 border-main-color rounded-full hover:border-dashed"><a
+                    href="#">Proceed</a></button>
+        </form>
+    </section>
+
+
+    <!-- FOOTER -->
+    <section class="footer py-16 px-4 bg-cover bg-center" id="order"
+        style="background-image: url('image/coffee-footer.jpg');">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ml-4">
+            <div class="box">
+                <h3 class="text-white text-2xl mb-4">Our Branches</h3>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fas fa-arrow-right mr-2"></i> Branch 1</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fas fa-arrow-right mr-2"></i> Branch 2</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fas fa-arrow-right mr-2"></i> Branch 3</a>
+                <a href="#" class="text-white fblock mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fas fa-arrow-right mr-2"></i> Branch 4</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fas fa-arrow-right mr-2"></i> Branch 5</a>
+            </div>
+
+            <div class="box">
+                <h3 class="text-white text-2xl mb-4">Quick Links</h3>
+                <a href="#home" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="text-white fas fa-arrow-right mr-2"></i> Home</a>
+                <a href="#about" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="text-white fas fa-arrow-right mr-2"></i> About</a>
+                <a href="#menu" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="text-white fas fa-arrow-right mr-2"></i> Menu</a>
+                <a href="#review" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="text-white fas fa-arrow-right mr-2"></i> Review</a>
+                <a href="#order" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="text-white fas fa-arrow-right mr-2"></i> Order</a>
+            </div>
+
+            <div class="box">
+                <h3 class="text-white text-2xl mb-4">Contact Info</h3>
+                <a href="#" class="text-white block mb-2"><i class="fas fa-phone mr-2"></i> +639-901-3456-123</a>
+                <a href="#" class="text-white block mb-2"><i class="fas fa-phone mr-2"></i> +639-901-7777-321</a>
+                <a href="#" class="text-white block mb-2"><i class="fas fa-envelope mr-2"></i>
+                    dejabrewcoffee@gmail.com</a>
+                <a href="#" class="text-white block mb-2"><i class="fas fa-envelope mr-2"></i> brewDeja@gmail.com</a>
+            </div>
+
+            <div class="box">
+                <h3 class="text-white text-2xl mb-4">Social Links</h3>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fab fa-facebook-f mr-2"></i> Facebook</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fab fa-twitter mr-2"></i> Twitter</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fab fa-instagram mr-2"></i> Instagram</a>
+                <a href="#" class="text-white block mb-2 hover:translate-x-2 transition-transform"><i
+                        class="fab fa-linkedin mr-2"></i> Linkedin</a>
+            </div>
+        </div>
+
+        <div class="text-white text-center text-xl mt-8 pt-8 border-t-2 border-gray">
+            <span class="border-b-2 border-dashed border-gray">DejaBrewCoffee</span> | all rights reserved
+        </div>
+    </section>
+
+    <!-- SWIPER -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- Custom JS File Link  -->
+    <script>
+        document.querySelectorAll('.image-slider img').forEach(images => {
+            images.onclick = () => {
+                var src = images.getAttribute('src');
+                document.querySelector('.main-home-image').src = src;
+            };
+        });
+
+        var swiper = new Swiper(".review-slider", {
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            loop: true,
+            grabCursor: true,
+            autoplay: {
+                delay: 7500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                }
+            },
+        });
+
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('overlay');
+        const menuIcon = menuBtn.querySelector('i');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.style.left = '0';
+                overlay.style.opacity = '0.5';
+                overlay.style.pointerEvents = 'auto';
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                mobileMenu.style.left = '-100%';
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && isMenuOpen) {
+                toggleMenu();
+            }
+        });
+
+        const header = document.querySelector('header');
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach((link, index) => {
+                link.style.animation = `fadeIn 0.5s ease forwards ${index / 7 + 0.3}s`;
+                link.style.opacity = '0';
+            });
+        });
+
+        function changeMainImage(element) {
+            const mainImage = document.getElementById("mainImage");
+            mainImage.src = element.src;
+        }
+
+        const deliveryModeSelect = document.getElementById('deliveryMode');
+        const addressField = document.getElementById('addressField');
+
+        deliveryModeSelect.addEventListener('change', function () {
+            if (this.value === 'delivery') {
+                addressField.style.display = 'block';
+            } else {
+                addressField.style.display = 'none';
+            }
+        });
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('overlay');
+
+            // Check if the mobile menu is currently visible
+            const isOpen = mobileMenu.style.transform === 'translateX(0%)';
+
+            // Open or close the mobile menu
+            mobileMenu.style.transform = isOpen ? 'translateX(-100%)' : 'translateX(0%)';
+            overlay.style.opacity = isOpen ? '0' : '0.5';
+            overlay.style.pointerEvents = isOpen ? 'none' : 'auto';
+        }
+
+        // Close mobile menu when overlay is clicked
+        document.getElementById('overlay').addEventListener('click', toggleMobileMenu);
+
+        // Add animation classes on page load
+        window.addEventListener('load', () => {
+            document.querySelector('.header-animation').classList.add('header-animation');
+            document.querySelector('.overlay-animation').classList.add('overlay-animation');
+        });
+    </script>
+</body>
+
+</html>
