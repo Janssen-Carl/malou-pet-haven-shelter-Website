@@ -88,14 +88,14 @@
                   <div class="mt-8"></div>
                   <a href="index.html"
                         class="px-4 py-3 text-xl text-center transition-colors mobile-nav-link hover:text-main-color/70">Home</a>
-                  <a href="event.html"
+                  <a href="#"
                         class="px-4 py-3 text-xl text-center transition-colors mobile-nav-link hover:text-main-color/70">Events</a>
                   <a href="#about"
                         class="px-4 py-3 text-xl text-center transition-colors mobile-nav-link hover:text-main-color/70">About
                         Us</a>
                   <a href="donate.html"
                         class="px-4 py-3 text-xl text-center transition-colors mobile-nav-link hover:text-main-color/70">Donate</a>
-                  <a href="#adopt"
+                  <a href="adopt.html"
                         class="px-4 py-3 text-xl text-center transition-colors mobile-nav-link hover:text-main-color/70">Adopt
                         a Pet</a>
             </div>
@@ -585,6 +585,7 @@
 
 
 
+
             const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('overlay');
@@ -602,7 +603,7 @@
                   } else {
                         mobileMenu.style.left = '-100%';
                         overlay.style.opacity = '0';
-                        overlay.style.pointerEvents = 'None';
+                        overlay.style.pointerEvents = 'none';
                         menuIcon.classList.remove('fa-times');
                         menuIcon.classList.add('fa-bars');
                   }
@@ -652,7 +653,7 @@
                   // Open or close the mobile menu
                   mobileMenu.style.transform = isOpen ? 'translateX(-100%)' : 'translateX(0%)';
                   overlay.style.opacity = isOpen ? '0' : '0.5';
-                  overlay.style.pointerEvents = isOpen ? 'None' : 'auto';
+                  overlay.style.pointerEvents = isOpen ? 'none' : 'auto';
             }
 
             // Close mobile menu when overlay is clicked
@@ -667,47 +668,52 @@
 
 
 
+
+
+
+
+
             document.addEventListener('DOMContentLoaded', () => {
-        // Define the pet data variable (initially empty, will be populated by fetch)
-        let pets = [];
+                  // Define the pet data variable (initially empty, will be populated by fetch)
+                  let pets = [];
 
-        // Fetch dogs and cats data from respective JSON files
-        const fetchPetsData = async () => {
-            try {
-                const [dogsResponse, catsResponse] = await Promise.all([
-                    fetch('cats.json'),
-                    fetch('dogs.json')
-                ]);
+                  // Fetch dogs and cats data from respective JSON files
+                  const fetchPetsData = async () => {
+                        try {
+                              const [dogsResponse, catsResponse] = await Promise.all([
+                                    fetch('cats.json'),
+                                    fetch('dogs.json')
+                              ]);
 
-                // Wait for both fetch calls to resolve
-                const dogsData = await dogsResponse.json();
-                const catsData = await catsResponse.json();
+                              // Wait for both fetch calls to resolve
+                              const dogsData = await dogsResponse.json();
+                              const catsData = await catsResponse.json();
 
-                // Combine both dog and cat data into one array
-                pets = [...dogsData, ...catsData];
+                              // Combine both dog and cat data into one array
+                              pets = [...dogsData, ...catsData];
 
-                // Render all pets initially
-                renderPets(pets);
-            } catch (error) {
-                console.error('Error loading pet data:', error);
-                alert('Error loading pet data.');
-            }
-        };
+                              // Render all pets initially
+                              renderPets(pets);
+                        } catch (error) {
+                              console.error('Error loading pet data:', error);
+                              alert('Error loading pet data.');
+                        }
+                  };
 
-        // Select DOM elements
-        const petList = document.querySelector('.grid');
+                  // Select DOM elements
+                  const petList = document.querySelector('.grid');
 
-        // Function to render pets
-        const renderPets = (filteredPets) => {
-            petList.innerHTML = '';
-            if (filteredPets.length === 0) {
-                petList.innerHTML = '<p class="text-center text-white">No pets match your filters. Please try different criteria.</p>';
-                return;
-            }
-            filteredPets.forEach(pet => {
-                const petCard = document.createElement('div');
-                petCard.classList.add('bg-white', 'rounded-lg', 'shadow-lg', 'p-6', 'text-center');
-                petCard.innerHTML = `
+                  // Function to render pets
+                  const renderPets = (filteredPets) => {
+                        petList.innerHTML = '';
+                        if (filteredPets.length === 0) {
+                              petList.innerHTML = '<p class="text-center text-white">No pets match your filters. Please try different criteria.</p>';
+                              return;
+                        }
+                        filteredPets.forEach(pet => {
+                              const petCard = document.createElement('div');
+                              petCard.classList.add('bg-white', 'rounded-lg', 'shadow-lg', 'p-6', 'text-center');
+                              petCard.innerHTML = `
                     <img src="${pet.image}" alt="${pet.name}" class="h-48 w-full object-cover rounded-lg mb-4">
                     <h2 class="text-xl font-bold mb-2">${pet.name}</h2>
                     <p class="text-gray-600">${capitalize(pet.type)} • ${capitalize(pet.age)} • ${capitalize(pet.size)}</p>
@@ -718,39 +724,39 @@
                         ${pet.availability === 'available' ? 'Adopt Me' : 'Already Adopted'}
                     </button>
                 `;
-                petList.appendChild(petCard);
+                              petList.appendChild(petCard);
+                        });
+                  };
+
+                  // Capitalize function
+                  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+                  // Function to filter pets
+                  function filterPets() {
+                        const type = document.getElementById('filterType').value;
+                        const age = document.getElementById('filterAge').value;
+                        const size = document.getElementById('filterSize').value;
+                        const availability = document.getElementById('filterAvailability').value;
+
+                        const filteredPets = pets.filter(pet => {
+                              return (type === 'all' || pet.type === type) &&
+                                    (age === 'all' || pet.age === age) &&
+                                    (size === 'all' || pet.size === size) &&
+                                    (availability === 'all' || pet.availability === availability);
+                        });
+
+                        renderPets(filteredPets);
+                  }
+
+                  // Initialize
+                  document.getElementById('filterType').addEventListener('change', filterPets);
+                  document.getElementById('filterAge').addEventListener('change', filterPets);
+                  document.getElementById('filterSize').addEventListener('change', filterPets);
+                  document.getElementById('filterAvailability').addEventListener('change', filterPets);
+
+                  // Fetch pet data and render initial pets
+                  fetchPetsData();
             });
-        };
-
-        // Capitalize function
-        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
-        // Function to filter pets
-        function filterPets() {
-            const type = document.getElementById('filterType').value;
-            const age = document.getElementById('filterAge').value;
-            const size = document.getElementById('filterSize').value;
-            const availability = document.getElementById('filterAvailability').value;
-
-            const filteredPets = pets.filter(pet => {
-                return (type === 'all' || pet.type === type) &&
-                       (age === 'all' || pet.age === age) &&
-                       (size === 'all' || pet.size === size) &&
-                       (availability === 'all' || pet.availability === availability);
-            });
-
-            renderPets(filteredPets);
-        }
-
-        // Initialize
-        document.getElementById('filterType').addEventListener('change', filterPets);
-        document.getElementById('filterAge').addEventListener('change', filterPets);
-        document.getElementById('filterSize').addEventListener('change', filterPets);
-        document.getElementById('filterAvailability').addEventListener('change', filterPets);
-
-        // Fetch pet data and render initial pets
-        fetchPetsData();
-    });
 
 
 

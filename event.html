@@ -54,7 +54,8 @@
       <header
             class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 bg-white shadow-md fade-animation">
             <!-- Menu Button -->
-            <div id="menu-btn" class="text-3xl transition-colors cursor-pointer lg:hidden hover:text-main-color/70">
+            <div id="menu-btn" class="text-3xl transition-colors cursor-pointer lg:hidden hover:text-main-color/70"
+                  onclick="toggleMobileMenu()">
                   <i class="fas fa-bars"></i>
             </div>
 
@@ -379,7 +380,6 @@
 
 
 
-
             const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('overlay');
@@ -403,7 +403,7 @@
                   }
             }
 
-            menuBtn.addEventListener('click', toggleMobileMenu);
+            menuBtn.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', toggleMenu);
 
             document.querySelectorAll('#mobile-menu a').forEach(link => {
