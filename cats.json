@@ -1,0 +1,75 @@
+[
+      {
+          "name": "Mittens",
+          "type": "cat",
+          "age": "kitten",
+          "size": "large",
+          "availability": "available",
+          "image": "images/cat-1.png",
+          "description": "Playful and curious. Mittens enjoys napping in the sun."
+      },
+      {
+          "name": "Whiskers",
+          "type": "cat",
+          "age": "kitten",
+          "size": "small",
+          "availability": "available",
+          "image": "images/cat-2.png",
+          "description": "Independent yet affectionate. Whiskers loves chin scratches."
+      },
+      {
+          "name": "Shadow",
+          "type": "cat",
+          "age": "kitten",
+          "size": "small",
+          "availability": "adopted",
+          "image": "images/cat-3.png",
+          "description": "Calm and observant. Shadow enjoys quiet time."
+      },
+      {
+          "name": "Luna",
+          "type": "cat",
+          "age": "kitten",
+          "size": "small",
+          "availability": "available",
+          "image": "images/cat-4.png",
+          "description": "Energetic and playful. Luna loves to chase toys."
+      },
+      {
+          "name": "Tiger",
+          "type": "cat",
+          "age": "adult",
+          "size": "large",
+          "availability": "available",
+          "image": "images/cat-5.png",
+          "description": "Bold and adventurous. Tiger enjoys exploring."
+      },
+      {
+          "name": "Smokey",
+          "type": "cat",
+          "age": "kitten",
+          "size": "small",
+          "availability": "available",
+          "image": "images/cat-6.png",
+          "description": "Gentle and relaxed. Smokey loves a quiet home."
+      },
+      {
+          "name": "Oreo",
+          "type": "cat",
+          "age": "adult",
+          "size": "medium",
+          "availability": "adopted",
+          "image": "images/cat-7.png",
+          "description": "Playful and sweet. Oreo loves to cuddle."
+      },
+      {
+          "name": "Snow",
+          "type": "cat",
+          "age": "kitten",
+          "size": "small",
+          "availability": "adopted",
+          "image": "images/cat-8.png",
+          "description": "Friendly and talkative. Ginger loves attention."
+      }
+  ]
+  

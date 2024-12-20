@@ -55,7 +55,7 @@
             class="fixed top-0 left-0 right-0 flex items-center justify-between z-50 bg-white shadow-md px-6 py-4 transition-all duration-300 fade-animation">
             <!-- Menu Button -->
             <div id="menu-btn" class="text-3xl cursor-pointer lg:hidden hover:text-main-color/70 transition-colors"
-                  onclick="toggleMobileMenu()">
+                  onclick="toggleMenu()">
                   <i class="fas fa-bars"></i>
             </div>
 
@@ -66,15 +66,15 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center justify-center flex-1 space-x-6">
-                  <a href="#index.html"
+                  <a href="#home"
                         class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Home</a>
                   <a href="event.html" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Events</a>
                   <a href="#about" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">About Us</a>
-                  <a href="#" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Donate</a>
+                  <a href="donate.html" class="nav-link text-lg hover:text-main-color/70 transition-colors py-2">Donate</a>
             </nav>
 
             <button class="button type1">
-                  <span class="btn-txt">Adopt a Pet</span>
+                  <a href="adopt.html"><span class="btn-txt">Adopt a Pet</span></a>
             </button>
 
       </header>
@@ -84,18 +84,18 @@
             class="fixed top-0 left-[-100%] h-full w-[70%] bg-white shadow-lg z-[1000] transition-transform duration-300 ease-in-out transform mobile-menu-animation">
             <div class="p-6 flex flex-col space-y-4">
                   <br> <br>
-                  <a href="#"
+                  <a href="#home"
                         class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Home</a>
-                  <a href="#"
-                        class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Adopt
-                        a Pet</a>
                   <a href="#event.html"
-                        class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Events</a>
+                        href="event.html" class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Events</a>
                   <a href="#"
                         class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">About
                         Us</a>
-                  <a href="#"
+                  <a href="donate.html"
                         class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Donate</a>
+                        <a href="adopt.html"
+                        class="mobile-nav-link text-xl py-3 px-4 text-center hover:text-main-color/70 transition-colors">Adopt
+                        a Pet</a>
             </div>
       </div>
 
@@ -160,51 +160,51 @@
                         <div class="swiper-wrapper">
                               <!-- Card 1 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
+                                    <img src="images/cat-1.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Mittens</h3>
                                     <p> 2 years old </p>
-                                    <p>Medium-sized</p>
+                                    <p>Large-sized</p>
+                                    <p>Male</p>
+                                    <p class="text-green-500 font-bold">Available</p>
+                              </div>
+
+                              <!-- Card 2 -->
+                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
+                                    <img src="images/cat-2.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Whiskers</h3>
+                                    <p> 5 months old </p>
+                                    <p>Small-sized</p>
                                     <p>Female</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
-                              <!-- Card 1 -->
+                              <!-- Card 3 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 2 years old </p>
-                                    <p>Medium-sized</p>
+                                    <img src="images/cat-4.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Luna</h3>
+                                    <p> 2 months old </p>
+                                    <p>Small-sized</p>
                                     <p>Female</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
-                              <!-- Card 1 -->
+                              <!-- Card 4 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
+                                    <img src="images/cat-5.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Tiger</h3>
                                     <p> 2 years old </p>
-                                    <p>Medium-sized</p>
-                                    <p>Female</p>
+                                    <p> Large-sized</p>
+                                    <p>Male</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
-                              <!-- Card 1 -->
+                              <!-- Card 5 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 2 years old </p>
-                                    <p>Medium-sized</p>
-                                    <p>Female</p>
-                                    <p class="text-green-500 font-bold">Available</p>
-                              </div>
-
-                              <!-- Card 1 -->
-                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 5 years old </p>
-                                    <p>Medium-sized</p>
-                                    <p>Female</p>
+                                    <img src="images/cat-6.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Smokey</h3>
+                                    <p> 2 months old </p>
+                                    <p>Small-sized</p>
+                                    <p>Male</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
@@ -221,14 +221,18 @@
                         aperiam, nobis itaque blanditiis nesciunt corrupti.</p>
 
                   <div class="flex flex-wrap justify-center gap-5 mt-8">
-                        <button class="aaa">I want to Adopt</button>
-                        <button class="aaa">I want to Donate</button>
+                        <a href="adopt.html">
+                              <button class="aaa">I want to Adopt</button>
+                        </a>
+                        <a href="donate.html">
+                              <button class="aaa">I want to Donate</button>
+                        </a>
                   </div>
             </div>
       </section>
 
       <!-- HOME 3 -->
-      <section class="home min-h-screen pt-20 content-center bg-cover bg-center h-screen bg-no-repeat" id="home-2"
+      <section class="home min-h-screen pt-20 content-center bg-cover bg-center h-screen bg-no-repeat" id="home-3"
             style="background-image: url('images/background 2.png');">
 
             <div class="text-center mx-auto max-w-3xl px-4 mt-0">
@@ -239,50 +243,50 @@
                         <div class="swiper-wrapper">
                               <!-- Card 1 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
+                                    <img src="images/dog-1.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Buddy</h3>
                                     <p> 2 years old </p>
                                     <p>Medium-sized</p>
+                                    <p>Male</p>
+                                    <p class="text-green-500 font-bold">Available</p>
+                              </div>
+
+                              <!-- Card 2 -->
+                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
+                                    <img src="images/dog-2.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Max</h3>
+                                    <p> 2 years old </p>
+                                    <p>Small-sized</p>
                                     <p>Female</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
-                              <!-- Card 1 -->
+                              <!-- Card 3 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 2 years old </p>
-                                    <p>Medium-sized</p>
+                                    <img src="images/dog-3.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Bella</h3>
+                                    <p> 1 year old </p>
+                                    <p>Small-sized</p>
                                     <p>Female</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
 
-                              <!-- Card 1 -->
+                              <!-- Card 4 -->
                               <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 2 years old </p>
-                                    <p>Medium-sized</p>
-                                    <p>Female</p>
-                                    <p class="text-green-500 font-bold">Available</p>
-                              </div>
-
-                              <!-- Card 1 -->
-                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
-                                    <p> 2 years old </p>
-                                    <p>Medium-sized</p>
-                                    <p>Female</p>
-                                    <p class="text-green-500 font-bold">Available</p>
-                              </div>
-
-                              <!-- Card 1 -->
-                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
-                                    <img src="images/cat-1.jpg" alt="Cat 1" class="w-full rounded-lg mb-1">
-                                    <h3 class="text-lg font-bold py-0">Name</h3>
+                                    <img src="images/dog-4.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Charlie</h3>
                                     <p> 5 years old </p>
-                                    <p>Medium-sized</p>
+                                    <p>Large-sized</p>
+                                    <p>Male</p>
+                                    <p class="text-green-500 font-bold">Available</p>
+                              </div>
+
+                              <!-- Card 5 -->
+                              <div class="swiper-slide bg-white p-4 rounded-lg shadow-lg">
+                                    <img src="images/dog-5.png" alt="Cat 1" class="w-full rounded-lg mb-1">
+                                    <h3 class="text-lg font-bold py-0">Lucy</h3>
+                                    <p> 3 years old </p>
+                                    <p>Large-sized</p>
                                     <p>Female</p>
                                     <p class="text-green-500 font-bold">Available</p>
                               </div>
@@ -300,8 +304,12 @@
                         saepe iste ab necessitatibus.</p>
 
                   <div class="flex flex-wrap justify-center gap-5 mt-8">
+                        <a href="adopt.html">
                         <button class="aaa">I want to Adopt</button>
+                  </a>
+                  <a href="donate.html">
                         <button class="aaa">I want to Donate</button>
+                  </a>
                   </div>
             </div>
       </section>
@@ -454,7 +462,7 @@
                         },
                         1024: {
                               slidesPerView: 3,
-                              spacebetween: 10,
+                              spaceBetween: 10,
                         },
                   },
             });

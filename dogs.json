@@ -1,0 +1,48 @@
+[
+      {
+          "name": "Buddy",
+          "type": "dog",
+          "age": "adult",
+          "size": "medium",
+          "availability": "available",
+          "image": "images/dog-1.png",
+          "description": "Buddy is energetic and loves playing fetch!"
+      },
+      {
+          "name": "Max",
+          "type": "dog",
+          "age": "adult",
+          "size": "small",
+          "availability": "available",
+          "image": "images/dog-2.png",
+          "description": "Loyal and calm. Max is looking for a quiet forever home."
+      },
+      {
+          "name": "Bella",
+          "type": "dog",
+          "age": "puppy",
+          "size": "small",
+          "availability": "available",
+          "image": "images/dog-3.png",
+          "description": "Adorable and playful. Bella loves cuddling and toys."
+      },
+      {
+          "name": "Charlie",
+          "type": "dog",
+          "age": "adult",
+          "size": "large",
+          "availability": "available",
+          "image": "images/dog-4.png",
+          "description": "Friendly and sociable. Charlie loves meeting new people."
+      },
+      {
+          "name": "Lucy",
+          "type": "dog",
+          "age": "senior",
+          "size": "large",
+          "availability": "available",
+          "image": "images/dog-5.png",
+          "description": "Calm and gentle. Lucy enjoys peaceful walks."
+      }
+  ]
+  
