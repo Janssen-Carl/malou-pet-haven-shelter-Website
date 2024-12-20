@@ -119,19 +119,19 @@
 
                   <!-- Filters -->
                   <div class="flex flex-wrap justify-center gap-4 mb-8">
-                        <select class="p-3 rounded-lg shadow-md">
-                              <option value="">Type: All</option>
+                        <select id="filterType" class="p-3 rounded-lg shadow-md">
+                              <option value="all">Type: All</option>
                               <option value="dog">Dog</option>
                               <option value="cat">Cat</option>
                         </select>
-                        <select class="p-3 rounded-lg shadow-md">
-                              <option value="">Age: Any</option>
+                        <select id="filterAge" class="p-3 rounded-lg shadow-md">
+                              <option value="all">Age: Any</option>
                               <option value="puppy">Puppy/Kitten</option>
                               <option value="adult">Adult</option>
                               <option value="senior">Senior</option>
                         </select>
-                        <select class="p-3 rounded-lg shadow-md">
-                              <option value="">Size: All</option>
+                        <select id="filterSize" class="p-3 rounded-lg shadow-md">
+                              <option value="all">Size: All</option>
                               <option value="small">Small</option>
                               <option value="medium">Medium</option>
                               <option value="large">Large</option>
@@ -667,94 +667,84 @@
 
 
 
-
             document.addEventListener('DOMContentLoaded', () => {
-                  // Define the pet data variable
-                  let pets = [];
+        // Define the pet data variable (initially empty, will be populated by fetch)
+        let pets = [];
 
-                  // Fetch dogs and cats data from respective JSON files
-                  const fetchPetsData = async () => {
-                        try {
-                              const [dogsResponse, catsResponse] = await Promise.all([
-                                    fetch('cats.json'),
-                                    fetch('dogs.json')
-                              ]);
+        // Fetch dogs and cats data from respective JSON files
+        const fetchPetsData = async () => {
+            try {
+                const [dogsResponse, catsResponse] = await Promise.all([
+                    fetch('cats.json'),
+                    fetch('dogs.json')
+                ]);
 
-                              // Wait for both fetch calls to resolve
-                              const dogsData = await dogsResponse.json();
-                              const catsData = await catsResponse.json();
+                // Wait for both fetch calls to resolve
+                const dogsData = await dogsResponse.json();
+                const catsData = await catsResponse.json();
 
-                              // Combine both dog and cat data into one array
-                              pets = [...dogsData, ...catsData];
+                // Combine both dog and cat data into one array
+                pets = [...dogsData, ...catsData];
 
-                              // After fetching data, apply filters and render the pets
-                              renderPets(pets);
-                        } catch (error) {
-                              console.error('Error loading pet data:', error);
-                        }
-                  };
+                // Render all pets initially
+                renderPets(pets);
+            } catch (error) {
+                console.error('Error loading pet data:', error);
+                alert('Error loading pet data.');
+            }
+        };
 
-                  // Select DOM elements
-                  const filters = document.querySelectorAll('select');
-                  const petList = document.querySelector('.grid');
+        // Select DOM elements
+        const petList = document.querySelector('.grid');
 
-                  // Function to render pets
-                  const renderPets = (filteredPets) => {
-                        petList.innerHTML = '';
-                        filteredPets.forEach(pet => {
-                              const petCard = document.createElement('div');
-                              petCard.classList.add('bg-white', 'rounded-lg', 'shadow-lg', 'p-6', 'text-center');
-                              petCard.innerHTML = `
-                <img src="${pet.image}" alt="${pet.name}" class="card-image h-48 w-full object-cover rounded-lg mb-4">
-                <h2 class="text-xl font-bold mb-2">${pet.name}</h2>
-                <p class="text-gray-600">${capitalize(pet.type)} • ${capitalize(pet.age)} • ${capitalize(pet.size)}</p>
-                <p class="${pet.availability === 'available' ? 'text-green-500' : 'text-red-500'} font-semibold mt-2">
-                    ${capitalize(pet.availability)}</p>
-                <p class="mt-4 text-gray-700 text-sm">${pet.description}</p>
-                <a href="#adopt"> 
-                <button class="${pet.availability === 'available' ? 'aaaa' : 'bbbb'} mt-4">
-                    ${pet.availability === 'available' ? 'Adopt Me' : 'Adopted'}
-                </button> </a>
-            `;
-                              petList.appendChild(petCard);
-                        });
-                  };
-
-                  // Capitalize function
-                  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
-                  // Function to filter pets
-                  const filterPets = () => {
-                        let filteredPets = pets;
-
-                        filters.forEach(filter => {
-                              const value = filter.value;
-                              const key = filter.id || filter.name; // Use the id or name of the filter for the key
-
-                              if (value && key) {
-                                    // Only apply filtering if a value is selected
-                                    filteredPets = filteredPets.filter(pet => {
-                                          // If the key is 'availability', check the exact match (case sensitive)
-                                          if (key === 'availability') {
-                                                return pet[key] === value;
-                                          } else {
-                                                // For other keys like 'type', 'age', 'size', perform case-insensitive match
-                                                return pet[key] && pet[key].toLowerCase() === value.toLowerCase();
-                                          }
-                                    });
-                              }
-                        });
-
-                        renderPets(filteredPets); // Render the filtered pets
-                  };
-                  // Add event listeners to filters
-                  filters.forEach(filter => {
-                        filter.addEventListener('change', filterPets);
-                  });
-
-                  // Fetch pet data and render initial pets
-                  fetchPetsData();
+        // Function to render pets
+        const renderPets = (filteredPets) => {
+            petList.innerHTML = '';
+            filteredPets.forEach(pet => {
+                const petCard = document.createElement('div');
+                petCard.classList.add('bg-white', 'rounded-lg', 'shadow-lg', 'p-6', 'text-center');
+                petCard.innerHTML = `
+                    <img src="${pet.image}" alt="${pet.name}" class="h-48 w-full object-cover rounded-lg mb-4">
+                    <h2 class="text-xl font-bold mb-2">${pet.name}</h2>
+                    <p class="text-gray-600">${capitalize(pet.type)} • ${capitalize(pet.age)} • ${capitalize(pet.size)}</p>
+                    <p class="${pet.availability === 'available' ? 'text-green-500' : 'text-red-500'} font-semibold mt-2">
+                        ${capitalize(pet.availability)}</p>
+                    <p class="mt-4 text-gray-700 text-sm">${pet.description}</p>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4">
+                        ${pet.availability === 'available' ? 'Adopt Me' : 'Already Adopted'}
+                    </button>
+                `;
+                petList.appendChild(petCard);
             });
+        };
+
+        // Capitalize function
+        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+        // Function to filter pets
+        function filterPets() {
+            const type = document.getElementById('filterType').value;
+            const age = document.getElementById('filterAge').value;
+            const size = document.getElementById('filterSize').value;
+
+            const filteredPets = pets.filter(pet => {
+                return (type === 'all' || pet.type === type) &&
+                       (age === 'all' || pet.age === age) &&
+                       (size === 'all' || pet.size === size);
+            });
+
+            renderPets(filteredPets);
+        }
+
+        // Initialize
+        document.getElementById('filterType').addEventListener('change', filterPets);
+        document.getElementById('filterAge').addEventListener('change', filterPets);
+        document.getElementById('filterSize').addEventListener('change', filterPets);
+
+        // Fetch pet data and render initial pets
+        fetchPetsData();
+    });
+
 
 
 
